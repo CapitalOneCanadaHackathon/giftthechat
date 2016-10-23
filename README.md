@@ -1,5 +1,5 @@
 # Giftthechat
-Giftthechat is an icon you can add to the footer of any website that will allow victims of domestic abuse connect with a support member of a charity.
+Giftthechat is an icon you can add to the footer of any website that will allow victims of domestic abuse seeking resources to toconnect with a professional support member of a charity.
 
 #Server
 Install node.js then run `node app.js` in the `dip server` folder
