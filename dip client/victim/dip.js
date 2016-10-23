@@ -115,8 +115,9 @@ var connect = function() {
 
 	    connection.onopen = function () {
 	        // first we want users to enter their names
-	        input.removeAttr('disabled');
-	        connection.send('clientType:victim');
+			input = document.getElementById(boxId);
+	        input.disabled = false;
+	        connection.send('clientType:survivor');
 	    };
 
 	    connection.onerror = function (error) {
@@ -150,7 +151,8 @@ var connect = function() {
 	                           json.data[i].color, new Date(json.data[i].time));
 	            }
 	        } else if (json.type === 'message') { // it's a single message
-	            input.removeAttr('disabled'); // let the user write another message
+	            input = document.getElementById(boxId);
+				input.disabled = false;
 	            addMessage(json.data.author, json.data.text,
 	                       json.data.color, new Date(json.data.time));
 	        } else {
@@ -161,7 +163,7 @@ var connect = function() {
 	    /**
 	     * Send mesage when user presses Enter key
 	     */
-	    input.keydown(function(e) {
+	    document.getElementById(boxId).addEventListener("keydown",function(e) {
 	        if (e.keyCode === 13) {
 	        		//sendMessage($(this).val());
 	            var msg = document.getElementById(boxId).value;
@@ -173,7 +175,8 @@ var connect = function() {
 	            $(this).val('');
 	            // disable the input field to make the user wait until server
 	            // sends back response
-	            input.attr('disabled', 'disabled');
+	            input = document.getElementById(boxId);
+				input.disabled = false;
 	            document.getElementById(boxId).value = '';
 	        }
 	    });
@@ -208,7 +211,7 @@ document.getElementsByTagName('body')[0].addEventListener("keyup", function(even
   	var el = document.getElementById(id);
 		el.parentElement.removeChild(el);
 		dipVisible = false;
-		connection.send('Victim had to leave in a hurry and has disconnected.');
+		connection.send('Survivor had to leave in a hurry and has disconnected.');
 		connection.close();
 		window.scrollTo(0,0);
   }
@@ -314,8 +317,8 @@ var run = function(){
 			}
 		}
 		else {
-			connect();
 			construct();
+			connect();
 		}
 	}
 	else {
@@ -327,11 +330,5 @@ var run = function(){
 	}
 	//document.write('<div style="height:400px">test</div>');
 };
-var el = document.createElement('script');
-el.src = 'https://code.jquery.com/jquery-1.12.4.min.js';
-document.getElementsByTagName('body')[0].appendChild(el);
-el = document.createElement('img');
-el.src = 'http://i.imgur.com/oZjhSae.png';
-el.onclick = run();
-el.height = '13px';
-el.width = '13px';
+document.write("<script src='https://code.jquery.com/jquery-1.12.4.min.js'></script>");
+document.write("<img src='http://i.imgur.com/oZjhSae.png' onclick='run()' height='13px' width='13px'>");

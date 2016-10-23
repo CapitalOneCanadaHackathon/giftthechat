@@ -107,7 +107,7 @@ $(function () {
          * Add message to the chat window
          */
         function addMessage(author, message, color, dt) {
-            content.prepend('<p>Helper@ ' +
+            content.prepend('<p>' + author +'@ ' +
                  + (dt.getHours() < 10 ? '0' + dt.getHours() : dt.getHours()) + ':'
                  + (dt.getMinutes() < 10 ? '0' + dt.getMinutes() : dt.getMinutes())
                  + ': ' + message + '</p>');
